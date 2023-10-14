@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class StringCalculator{
     public static void main(String[] args){
         StringCalculator strcalc = new StringCalculator();
-        String str = "1,-2\n3,-4";
+        String str = "1000,1111\n789,7171";
         try{
             if (str.endsWith(",") || str.endsWith("\n")) {
                 throw new IllegalArgumentException("Invalid input: string ends with a delimiter");
@@ -50,7 +50,9 @@ public class StringCalculator{
             throw new IllegalArgumentException("Negative numbers are not allowed: " +neg_int);
         }
         for(String num : nums){
-            sum += Integer.parseInt(num);
+            if(Integer.parseInt(num) <= 1000){
+                sum += Integer.parseInt(num);
+            }
         }
         return sum;
     }

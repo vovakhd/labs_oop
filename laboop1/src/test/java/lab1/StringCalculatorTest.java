@@ -41,4 +41,10 @@ public class StringCalculatorTest{
         assertThrows(IllegalArgumentException.class, () -> strcalc.add("1,-2\n7,-4"));
         assertThrows(IllegalArgumentException.class, () -> strcalc.add("//;\n-1;-2;-5,-6\n-2"));
     }
+    @Test
+    void test6() {
+        assertEquals(1789, strcalc.add("1000,1111\n789,7171"));
+        assertEquals(0, strcalc.add("1101,1001\n7777,4012"));
+        assertEquals(2118, strcalc.add("//;\n100;999;109,1099\n910"));
+    }
 }
