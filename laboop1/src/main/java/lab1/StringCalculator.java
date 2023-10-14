@@ -1,11 +1,13 @@
 package lab1;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculator{
     public static void main(String[] args){
         StringCalculator strcalc = new StringCalculator();
-        String str = "//[=]\n1=2===3==2";
+        String str = "//[*][-][%]\n1*2-3%4";
         try{
             if (str.endsWith(",") || str.endsWith("\n")) {
                 throw new IllegalArgumentException("Invalid input: string ends with a delimiter");
@@ -32,6 +34,17 @@ public class StringCalculator{
             String del = String.valueOf(numbers.charAt(3));
             numbers = numbers.substring(6);
             numbers = numbers.replace(del, ",");
+        }
+        if (numbers.length() > 6  && numbers.charAt(0) == '/' && numbers.charAt(1) == '/' && numbers.charAt(2) == '[' && numbers.charAt(4) == ']' && numbers.charAt(5) == '['){
+            String delimiterPattern = "\\[([^\\]]+)\\]";
+            Pattern pat = Pattern.compile(delimiterPattern);
+            Matcher matcher = pat.matcher(numbers.substring(2, numbers.indexOf('\n')));
+            StringBuilder del = new StringBuilder(",");
+            while (matcher.find()) {
+                del.append("|").append(Pattern.quote(matcher.group(1)));
+            }
+            numbers = numbers.substring(numbers.indexOf('\n') + 1);
+            numbers = numbers.replaceAll(del.toString(), ",");
         }
         String[] nums = numbers.split("[,\\n]+");
         int sum = 0;
