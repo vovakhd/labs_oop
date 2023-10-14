@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class StringCalculator{
     public static void main(String[] args){
         StringCalculator strcalc = new StringCalculator();
-        String str = "//[*][-][%]\n1*2-3%4";
+        String str = "//[*][-][%]\n1**2---3%4";
         try{
             if (str.endsWith(",") || str.endsWith("\n")) {
                 throw new IllegalArgumentException("Invalid input: string ends with a delimiter");

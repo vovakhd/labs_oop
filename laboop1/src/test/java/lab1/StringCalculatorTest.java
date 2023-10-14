@@ -59,4 +59,11 @@ public class StringCalculatorTest{
         assertThrows(IllegalArgumentException.class, () -> strcalc.add("//;][/]\n100;999;109/1099/910"));
         assertThrows(IllegalArgumentException.class, () -> strcalc.add("//[*][;\n100;999*109,1099\n910"));
     }
+    @Test
+    void test9() {
+        assertEquals(10, strcalc.add("//[*][-][%]\n1*2--3%%%%%%4"));
+        assertEquals(115, strcalc.add("//[*][+][^]\n100^^^^^2,3\n2***7++++1"));
+        assertThrows(IllegalArgumentException.class, () -> strcalc.add("//;][/]\n100;999;;;109/1099//910"));
+        assertThrows(IllegalArgumentException.class, () -> strcalc.add("//[*][;\n100;;;999****109,1099\n910"));
+    }
 }
