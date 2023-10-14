@@ -1,23 +1,15 @@
 package lab1;
 
-import java.util.Scanner;
-
 public class StringCalculator{
     public static void main(String[] args){
-        StringCalculator string_calculator = new StringCalculator();
-        Scanner sc = new Scanner(System.in);
-
+        StringCalculator strcalc = new StringCalculator();
+        String str = "1\n2";
         try{
-            System.out.print("Enter a string: ");
-            String string = sc.nextLine();
-
-            if (string.endsWith(",")) {
-                throw new IllegalArgumentException("Invalid input: string ends with a comma");
+            if (str.endsWith(",") || str.endsWith("\n")) {
+                throw new IllegalArgumentException("Invalid input: string ends with a delimiter");
             }
 
-            int sum = string_calculator.add(string);
-
-            System.out.println();
+            int sum = strcalc.add(str);
             System.out.println("The sum of these numbers is: " + sum);
         }
         catch(IllegalArgumentException e){
@@ -29,7 +21,10 @@ public class StringCalculator{
         if (numbers == null || numbers.isEmpty()){
             return 0;
         }
-        String[] nums = numbers.split(",");
+        if (numbers.contains(",\n") || numbers.contains("\n,") || numbers.contains("\n\n") || numbers.contains(",,")){
+            throw new IllegalArgumentException("Invalid input: several delimiters in a row");
+        }
+        String[] nums = numbers.split("[,\\n]");
         int sum = 0;
         for (String num : nums){
             try {

@@ -21,4 +21,11 @@ public class StringCalculatorTest{
         assertThrows(IllegalArgumentException.class, () -> strcalc.add("w,2,3"));
         assertThrows(IllegalArgumentException.class, () -> strcalc.add(",3,"));
     }
+    @Test
+    void test3() {
+        assertEquals(172, strcalc.add("45,6\n87\n1,33"));
+        assertThrows(IllegalArgumentException.class, () -> strcalc.add("1,\n"));
+        assertThrows(IllegalArgumentException.class, () -> strcalc.add("\n1\n4"));
+        assertEquals(6, strcalc.add("1\n3,2"));
+    }
 }
