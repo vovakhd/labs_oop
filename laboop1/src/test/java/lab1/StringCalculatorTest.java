@@ -28,4 +28,11 @@ public class StringCalculatorTest{
         assertThrows(IllegalArgumentException.class, () -> strcalc.add("\n1\n4"));
         assertEquals(6, strcalc.add("1\n3,2"));
     }
+    @Test
+    void test4() {
+        assertEquals(16, strcalc.add("//;\n1;2;5;6;2"));
+        assertThrows(IllegalArgumentException.class, () -> strcalc.add("//;\n1;;2;5;6;2"));
+        assertEquals(16, strcalc.add("//;\n1;2;5,6\n2"));
+        assertEquals(16, strcalc.add("//.\n1.2\n5,6\n2"));
+    }
 }
