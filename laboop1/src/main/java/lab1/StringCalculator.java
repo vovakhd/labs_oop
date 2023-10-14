@@ -1,9 +1,11 @@
 package lab1;
 
+import java.util.ArrayList;
+
 public class StringCalculator{
     public static void main(String[] args){
         StringCalculator strcalc = new StringCalculator();
-        String str = "//;\n1;2\n3,4";
+        String str = "1,-2\n3,-4";
         try{
             if (str.endsWith(",") || str.endsWith("\n")) {
                 throw new IllegalArgumentException("Invalid input: string ends with a delimiter");
@@ -33,10 +35,22 @@ public class StringCalculator{
         int sum = 0;
         for (String num : nums){
             try {
-                sum += Integer.parseInt(num);
+                Integer.parseInt(num);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException(e.getMessage());
             }
+        }
+        ArrayList<Integer> neg_int = new ArrayList<>();
+        for(String num : nums){
+            if(Integer.parseInt(num) < 0){
+                neg_int.add(Integer.parseInt(num));
+            }
+        }
+        if(!neg_int.isEmpty()){
+            throw new IllegalArgumentException("Negative numbers are not allowed: " +neg_int);
+        }
+        for(String num : nums){
+            sum += Integer.parseInt(num);
         }
         return sum;
     }
