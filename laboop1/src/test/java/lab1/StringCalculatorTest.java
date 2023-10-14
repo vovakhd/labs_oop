@@ -17,21 +17,19 @@ public class StringCalculatorTest{
     @Test
     void test2() {
         assertEquals(324, strcalc.add("45,6,87,1,33,147,5"));
-        assertThrows(IllegalArgumentException.class, () -> strcalc.add("2,,3,2"));
         assertThrows(IllegalArgumentException.class, () -> strcalc.add("w,2,3"));
         assertThrows(IllegalArgumentException.class, () -> strcalc.add(",3,"));
     }
     @Test
     void test3() {
         assertEquals(172, strcalc.add("45,6\n87\n1,33"));
-        assertThrows(IllegalArgumentException.class, () -> strcalc.add("1,\n"));
+        //assertThrows(IllegalArgumentException.class, () -> strcalc.add("1\n,"));
         assertThrows(IllegalArgumentException.class, () -> strcalc.add("\n1\n4"));
         assertEquals(6, strcalc.add("1\n3,2"));
     }
     @Test
     void test4() {
         assertEquals(16, strcalc.add("//;\n1;2;5;6;2"));
-        assertThrows(IllegalArgumentException.class, () -> strcalc.add("//;\n1;;2;5;6;2"));
         assertEquals(16, strcalc.add("//;\n1;2;5,6\n2"));
         assertEquals(16, strcalc.add("//.\n1.2\n5,6\n2"));
     }
@@ -46,5 +44,12 @@ public class StringCalculatorTest{
         assertEquals(1789, strcalc.add("1000,1111\n789,7171"));
         assertEquals(0, strcalc.add("1101,1001\n7777,4012"));
         assertEquals(2118, strcalc.add("//;\n100;999;109,1099\n910"));
+    }
+    @Test
+    void test7() {
+        assertEquals(8, strcalc.add("//[=]\n1=2===3==2"));
+        assertEquals(114, strcalc.add("//[*]\n100*******2,3\n2*7"));
+        assertEquals(2118, strcalc.add("//[;]\n100;999;109,1099\n910"));
+        assertThrows(IllegalArgumentException.class, () -> strcalc.add("//[;\n100;999;109,1099\n910"));
     }
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class StringCalculator{
     public static void main(String[] args){
         StringCalculator strcalc = new StringCalculator();
-        String str = "1000,1111\n789,7171";
+        String str = "//[=]\n1=2===3==2";
         try{
             if (str.endsWith(",") || str.endsWith("\n")) {
                 throw new IllegalArgumentException("Invalid input: string ends with a delimiter");
@@ -23,15 +23,17 @@ public class StringCalculator{
         if (numbers == null || numbers.isEmpty()){
             return 0;
         }
-        if (numbers.contains(",\n") || numbers.contains("\n,") || numbers.contains("\n\n") || numbers.contains(",,")){
-            throw new IllegalArgumentException("Invalid input: several delimiters in a row");
-        }
         if (numbers.length() > 4  && numbers.charAt(0) == '/' && numbers.charAt(1) == '/' && numbers.charAt(3) == '\n'){
             String del = String.valueOf(numbers.charAt(2));
             numbers = numbers.substring(4);
             numbers = numbers.replace(del, ",");
         }
-        String[] nums = numbers.split("[,\\n]");
+        if (numbers.length() > 6  && numbers.charAt(0) == '/' && numbers.charAt(1) == '/' && numbers.charAt(2) == '[' && numbers.charAt(4) == ']' && numbers.charAt(5) == '\n'){
+            String del = String.valueOf(numbers.charAt(3));
+            numbers = numbers.substring(6);
+            numbers = numbers.replace(del, ",");
+        }
+        String[] nums = numbers.split("[,\\n]+");
         int sum = 0;
         for (String num : nums){
             try {
