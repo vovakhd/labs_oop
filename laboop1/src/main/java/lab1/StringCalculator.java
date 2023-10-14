@@ -4,14 +4,18 @@ import java.util.Scanner;
 
 public class StringCalculator{
     public static void main(String[] args){
-        StringCalculator strcalc = new StringCalculator();
+        StringCalculator string_calculator = new StringCalculator();
         Scanner sc = new Scanner(System.in);
 
         try{
-            System.out.print("Enter a string of up to 2 numbers: ");
+            System.out.print("Enter a string: ");
             String string = sc.nextLine();
 
-            int sum = strcalc.add(string);
+            if (string.endsWith(",")) {
+                throw new IllegalArgumentException("Invalid input: string ends with a comma");
+            }
+
+            int sum = string_calculator.add(string);
 
             System.out.println();
             System.out.println("The sum of these numbers is: " + sum);
@@ -26,9 +30,6 @@ public class StringCalculator{
             return 0;
         }
         String[] nums = numbers.split(",");
-        if (nums.length > 2) {
-            throw new IllegalArgumentException("Error: The method accepts up to 2 numbers.");
-        }
         int sum = 0;
         for (String num : nums){
             try {

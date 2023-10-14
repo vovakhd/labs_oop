@@ -12,6 +12,13 @@ public class StringCalculatorTest{
         assertEquals(0, strcalc.add(""));
         assertEquals(1, strcalc.add("1"));
         assertEquals(3, strcalc.add("1,2"));
-        assertThrows(IllegalArgumentException.class, () -> strcalc.add("1,g,3"));
+        assertThrows(IllegalArgumentException.class, () -> strcalc.add("1,g"));
+    }
+    @Test
+    void test2() {
+        assertEquals(324, strcalc.add("45,6,87,1,33,147,5"));
+        assertThrows(IllegalArgumentException.class, () -> strcalc.add("2,,3,2"));
+        assertThrows(IllegalArgumentException.class, () -> strcalc.add("w,2,3"));
+        assertThrows(IllegalArgumentException.class, () -> strcalc.add(",3,"));
     }
 }
